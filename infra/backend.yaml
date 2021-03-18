@@ -18,7 +18,7 @@ spec:
         app: backend
     spec:
       containers:
-      - image: docker4win/backend:3fde438d42e5b3816db53e8163f9566fb7f136f7
+      - image: docker4win/backend:b31f1d18ad3293878ddf843ecc1796a439085b70
         name: backend
         ports:
         - containerPort: 5000
