@@ -1,9 +1,12 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
     app: frontend
   name: frontend
+  annotations:
+    fluxcd.io/automated: 'true'
 spec:
   replicas: 1
   selector:
@@ -22,8 +25,8 @@ spec:
           name: http
         resources:
           limits:
-           cpu: "100m"
-           memory: "64Mi"
+            cpu: "100m"
+            memory: "64Mi"
 ---
 apiVersion: v1
 kind: Service
