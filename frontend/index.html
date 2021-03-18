@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <script>
+
+    async function sendRequest() {
+
+      let url = "/req";
+      let status = document.getElementById("response");
+      let form = document.forms.reqform;
+      let method = form.elements.reqmethod.value;
+      let body = form.elements.reqbody.value;
+      let params = {
+        method: method,
+        // mode: 'cors',
+      };
+
+      switch (method) {
+        case "GET":
+          url = url + '?body=' + body;
+          params.headers = {"Content-Type": "text/plain"};
+          break;
+        case "POST":
+          params.body = JSON.stringify({"body": body});
+          params.headers = {"Content-Type": "application/json"};
+          break;
+        default:
+          status.innerHTML = "Not implemented";
+          return;
+      }
+      console.log(url);     
+      status.innerHTML = await fetch(url, params)
+        .then(result => result.text())
+        .catch(error => error);
+
+    }
+  </script>
+</head>
+
+<body>
+  <form name="reqform">
+    <label for="reqmethod">Choose a method:</label>
+    <select name="reqmethod">
+      <option value="GET">GET</option>
+      <option value="POST">POST</option>
+      <option value="PUT">PUT</option>
+      <option value="DELETE">DELETE</option>
+    </select>
+    <br/>
+    <label for="reqbody">Body message:</label>
+    <input type="text" name="reqbody" onkeypress="return event.keyCode != 13;">
+    <br/><br/>
+    <input type="button" onclick="sendRequest()" value="Send a Request"/>
+  </form>
+  <br/>
+  <div id="response">response placeholder</div>
+
+</body>
+
+</html>
