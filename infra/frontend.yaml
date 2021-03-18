@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: frontend
+  name: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - image: docker4win/frontend:e0a150fde9bf5787a9d3fa7ff0d209711698bf51
+        name: frontend
+        ports:
+        - containerPort: 80
+          name: http
+        resources:
+          limits:
+           cpu: "100m"
+           memory: "64Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: frontend
+  name: frontend
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: http
+  selector:
+    app: frontend
+  type: LoadBalancer
+

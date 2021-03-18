@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: backend
+  name: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - image: docker4win/backend:3fde438d42e5b3816db53e8163f9566fb7f136f7
+        name: backend
+        ports:
+        - containerPort: 5000
+          name: flask
+        resources:
+          limits:
+           cpu: "100m"
+           memory: "64Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: backend
+  name: backend
+spec:
+  ports:
+  - port: 5000
+    protocol: TCP
+    targetPort: flask
+  selector:
+    app: backend
