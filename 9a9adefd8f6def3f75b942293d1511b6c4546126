@@ -1,0 +1,1 @@
+{"jobID":"62121ef4-0c93-7ff9-24b2-46dd71cf92e7","spec":{"type":"policy","cause":{"Message":"","User":"Oleg Glushko \u003coleg.glushko@outlook.com\u003e"},"spec":{"default:deployment/frontend":{"add":{"automated":"true"},"remove":{}}}},"result":null}
