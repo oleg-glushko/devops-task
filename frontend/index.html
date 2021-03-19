@@ -30,7 +30,6 @@
           status.innerHTML = "Not implemented";
           return;
       }
-      console.log(url);     
       status.innerHTML = await fetch(url, params)
         .then(result => result.text())
         .catch(error => error);
