@@ -1,9 +1,27 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
 name: BackendCI
+
+env:
+  TARGET_COMPONENT : "backend"
 
 on:
   push:
     branches: [ master ]
-    paths: [ "backend/**" ]
+    paths: [ "${{ env.TARGET_COMPONENT}}/**" ]
+    paths-ignore: [ "${{ env.TARGET_COMPONENT}}/README.md" ]
+
 
 jobs:
   build:
@@ -25,6 +43,6 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
-          context: ./backend
+          context: ./${{ env.TARGET_COMPONENT }}
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/backend:${{ github.sha }}
+          tags: ${{ secrets.DOCKER_USERNAME }}/${{ env.TARGET_COMPONENT }}:${{ github.sha }}
