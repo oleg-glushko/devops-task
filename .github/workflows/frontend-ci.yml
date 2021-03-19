@@ -1,5 +1,8 @@
 name: FrontendCI
 
+env:
+  TARGET_COMPONENT : "frontend"
+
 on:
   push:
     branches: [ master ]
@@ -21,10 +24,10 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
-        
+
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
-          context: ./frontend
+          context: ./${{ env.TARGET_COMPONENT }}
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/frontend:${{ github.sha }}
+          tags: ${{ secrets.DOCKER_USERNAME }}/${{ env.TARGET_COMPONENT }}:${{ github.sha }}
