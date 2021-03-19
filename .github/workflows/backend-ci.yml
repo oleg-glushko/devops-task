@@ -7,7 +7,6 @@ on:
   push:
     branches: [ master ]
     paths: [ "${{ env.TARGET_COMPONENT}}/**" ]
-    paths-ignore: [ "${{ env.TARGET_COMPONENT}}/README.md" ]
 
 
 jobs:
