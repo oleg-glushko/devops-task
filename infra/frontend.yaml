@@ -18,7 +18,7 @@ spec:
         app: frontend
     spec:
       containers:
-      - image: docker4win/frontend:e0a150fde9bf5787a9d3fa7ff0d209711698bf51
+      - image: docker4win/frontend:3d67b9e8dad6b0cd398c97829de7e5bd57b2d903
         name: frontend
         ports:
         - containerPort: 80
